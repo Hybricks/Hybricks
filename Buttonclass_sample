@@ -1,0 +1,21 @@
+# Calculate RPM value using a non_latching hall sensor and 2 magnets on the rotating object
+# => high pulse is 360 degree rotation
+# Use pin14 as if it is a Button class object supporting .getpresses() 
+
+from microbit import *
+import time
+
+buttonZ = Button(pin14)		# If this would work :))
+
+sample_t = 10     		        
+start_t = ticks_ms()
+
+while True:
+    # do your thing
+    
+    if ticks_diff(ticks_ms(), start_t) > sample_t:
+        nr_of_pulses = buttonZ.get_presses()		#Then here is the magic!
+        RPM = (60000 * nr_of_pulses) / sample_t 
+        start_t = ticks_ms()
+        
+ 
